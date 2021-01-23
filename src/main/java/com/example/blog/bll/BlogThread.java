@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name="thread")
 public class BlogThread {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long Id;
@@ -18,11 +17,13 @@ public class BlogThread {
     private String text;
 
 
-    public BlogThread(String title, LocalDateTime dateTime, String text) {
+    public BlogThread(long id, String title, LocalDateTime dateTime, String text) {
+        Id = id;
         this.title = title;
         this.dateTime = dateTime;
         this.text = text;
     }
+
 
     public BlogThread() {
     }
@@ -49,6 +50,14 @@ public class BlogThread {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public long getId() {
+        return Id;
+    }
+
+    public void setId(long id) {
+        Id = id;
     }
 
 
