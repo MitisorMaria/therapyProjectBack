@@ -1,24 +1,33 @@
 package com.example.blog.bll;
 
+import org.springframework.data.elasticsearch.annotations.DateFormat;
+import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name="thread")
+@Document(indexName = "blog")
 public class BlogThread {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long Id;
+    private Long id;
     @Column(name="title")
+    @Field(type = FieldType.Text, includeInParent = true)
     private String title;
     @Column(name="datetime")
+    @Field(type = FieldType.Date, format = DateFormat.date_hour_minute_second)//, pattern="YYYY-MM-DD'T'HH:mm:ss")
     private LocalDateTime dateTime;
     @Column(name="text")
+    @Field(type = FieldType.Text, includeInParent = true)
     private String text;
 
 
     public BlogThread(long id, String title, LocalDateTime dateTime, String text) {
-        Id = id;
+        id = id;
         this.title = title;
         this.dateTime = dateTime;
         this.text = text;
@@ -52,12 +61,12 @@ public class BlogThread {
         this.text = text;
     }
 
-    public long getId() {
-        return Id;
+    public Long getId() {
+        return id;
     }
 
-    public void setId(long id) {
-        Id = id;
+    public void setId(Long id) {
+        id = id;
     }
 
 
