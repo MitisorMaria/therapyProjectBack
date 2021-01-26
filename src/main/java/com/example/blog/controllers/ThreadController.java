@@ -51,7 +51,7 @@ public class ThreadController {
             return threadList;
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            return new ArrayList<>();
         }
     }
 }
